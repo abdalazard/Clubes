@@ -13,8 +13,8 @@ class CreateTimeTable extends Migration
      */
     public function up()
     {
-        Schema::create('time', function (Blueprint $table) {
-            $table->id('id_time');
+        Schema::create('times', function (Blueprint $table) {
+            $table->id('time_id');
             $table->string("nome_time");
             $table->dateTime("created_at")->nullable();
             $table->dateTime("updated_at")->nullable();
@@ -28,6 +28,6 @@ class CreateTimeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('time');
+        Schema::dropIfExists('times');
     }
 }
