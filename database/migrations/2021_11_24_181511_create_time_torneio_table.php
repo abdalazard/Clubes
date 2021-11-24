@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimeTable extends Migration
+class CreateTimetorneioTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTimeTable extends Migration
      */
     public function up()
     {
-        Schema::create('times', function (Blueprint $table) {
-            $table->id('time_id');
-            $table->string("nome_time");
-            $table->dateTime("created_at")->nullable();
-            $table->dateTime("updated_at")->nullable();
+        Schema::create('Time_torneio', function (Blueprint $table) {
+            $table->foreignId("torneio_id");
+            $table->foreignId("time_id");
         });
     }
 
@@ -28,6 +26,6 @@ class CreateTimeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('times');
+        Schema::dropIfExists('Time_torneio');
     }
 }
