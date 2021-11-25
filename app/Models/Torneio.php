@@ -15,7 +15,7 @@ class Torneio extends Model
     public function times() : BelongsToMany
     {
 
-        return $this->belongsToMany(Time::class, 'time_torneio', 'torneio_id', 'time_id');
+        return $this->belongsToMany(Time::class, 'time_torneio', 'torneio_id', 'id');
     }
 
 }

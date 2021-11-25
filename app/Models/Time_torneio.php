@@ -16,7 +16,8 @@ class Time_torneio extends Model
     {
 
 
-    return $this->hasMany(Time::class, 'time_id');
+    return $this->hasMany(Time::class, 'time_id', 'time_id');
+                //É necessário identificar qual são os ids: o que vem do model time, e o que está no banco
 
     }
 
@@ -24,8 +25,8 @@ class Time_torneio extends Model
     public function torneio() : HasMany
     {
 
-
-    return $this->hasMany(Torneio::class, 'torneio_id');
+                //É necessário identificar qual são os ids: o que vem do model torneio, e o que está no banco
+    return $this->hasMany(Torneio::class, 'torneio_id', 'torneio_id');
 
     }
 
