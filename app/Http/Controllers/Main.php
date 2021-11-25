@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Selecao;
 use App\Models\Time;
 use App\Models\Torneio;
 
@@ -30,13 +31,12 @@ class Main extends Controller
 
 
     //================================================================
+        //cadastro de clube
 
 
     public function registroclube(){
-        //cadastro de clube
         $novo_time = new Time;
-        $novo_time->time_id = 4;
-        $novo_time->nome_time = "Vasco";
+        $novo_time->nome_time = "Real Madrid";
 
 
 
@@ -52,14 +52,36 @@ class Main extends Controller
 
 //===========================================================================
 
+     //cadastro de clube
+
+
+     public function registroSelecao(){
+        $nova_selecao = new Selecao();
+        $nova_selecao->nome_selecao= "França";
+
+
+
+        if($nova_selecao->save()){
+
+            return redirect()->route('home');
+        }
+        else{
+            echo "!ok";
+        }
+    }
+
+//===========================================================================
+
+
 
     public function registrojogador(){
         //cadastro um jogador
         $novo_jogador = new Player;
 
-        $novo_jogador->time_id = 2;
-        $novo_jogador->nome_jogador = "Diego Ribas";
-        $novo_jogador->posicao = "MAT";
+        $novo_jogador->time_id = 3;
+        $novo_jogador->selecao_id = 2;
+        $novo_jogador->nome_jogador = "Karim Benzema";
+        $novo_jogador->posicao = "CA";
         $novo_jogador->numero = 10;
         $novo_jogador->save();
 
@@ -76,7 +98,7 @@ class Main extends Controller
 //===========================================================================
 
     public function time(){
-            $id = 2;
+            $id = 3;
             $times = Time::all();  //transformo a variavel em um conceito de time
             $time = $times->find($id); ////encontro o time que eu quero, contando que esteja no banco
 
@@ -111,19 +133,41 @@ class Main extends Controller
 
 
 
-
-
             //===================================================================
 
 
             //Dados de jogadores desse time
             $elenco = $time->where('id', $id); //Com o id do time, onde na tabela "Time" com o time_id = $id
-            $jogadores = $elenco->first()->jogadordoTime; //traga dados
+            $jogadores = $elenco->first()->jogadordoTime;  //traga dados
+
+            
             foreach($jogadores as $jogador){ //para cada jogador, faça
-                echo $jogador->nome_jogador."  |   ";
-                echo $jogador->posicao. "   |   ";
-                echo $jogador->numero."<br><br>";
+
+                
+
+
+                if($jogador->selecao_id === null){
+
+                    echo $jogador->nome_jogador."  |   ";
+                    echo $jogador->posicao. "   |   ";
+                    echo $jogador->numero."  |  ";
+                    echo "Convocado pela seleção: NÃO <br><br>";
+
+                }else{
+                    
+                    
+                    $jogadores_selecao = $jogador->select()->find($jogador->selecao_id); //Identifica os jogadores do time selecionado pela tabela Player
+                    $selecao = $jogadores_selecao->where('selecao_id', $jogador->selecao_id); // Através do id
+                    $convocacao = $selecao->first()->selecaoJogador;
+
+                    echo $jogador->nome_jogador."  |   ";
+                    echo $jogador->posicao. "   |   ";
+                    echo $jogador->numero."  |  ";
+                    echo "Convocado pela seleção: " . $convocacao->nome_selecao . "<br><br>";
+
             }
+        }
+
     }
 
 

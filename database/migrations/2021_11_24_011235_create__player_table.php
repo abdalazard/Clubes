@@ -16,9 +16,10 @@ class CreatePlayerTable extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('time_id');
+            $table->foreignId('selecao_id')->nullable();
             $table->string('nome_jogador');
             $table->string('posicao');
-            $table->string('numero');
+            $table->string('numero')->nullable();
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
         });

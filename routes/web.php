@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get("/registroselecao", [Main::class, "registroselecao"]);
 Route::get("/registroclube", [Main::class, "registroclube"]);
 Route::get("/registrojogador", [Main::class, "registrojogador"]);
 Route::get("/registrotorneio", [Main::class, "registroTorneio"]);
+
 Route::get("/", [Main::class, "time"])->name('home');
