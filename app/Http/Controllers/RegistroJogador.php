@@ -9,10 +9,10 @@ class RegistroJogador extends Controller
     //===========================================================================
 
     public $id_time = 2;
-    public $id_selecao = 1;
-    public $_jogador = "Gabriel Barbosa";
-    public $pos = "CA";
-    public $num = "9";
+    public $id_selecao = null;
+    public $_jogador = "Bruno Henrique";
+    public $pos = "PTE";
+    public $num = "27";
 
 
 
