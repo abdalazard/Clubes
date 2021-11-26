@@ -10,16 +10,17 @@ class RegistroClube extends Controller
     //================================================================
         //cadastro de clube
 
+        public $nome_time = "Barcelona";
 
-        public function registroclube($nome_time){
+        public function registroclube(){
             $novo_time = new Time();
             $novo_time->nome_time = $this->nome_time;
-            
-    
-    
-    
+
+
+
+
             if($novo_time->save()){
-    
+
                 return redirect()->route('home');
             }
             else{

@@ -8,24 +8,17 @@ use App\Models\Time;
 class Main extends Controller
 {
 
-   
-
-
-   
-
-
-
 
 
     public function time(){
-            $id = 2;
+            $id = 1;
             $times = Time::all();  //transformo a variavel em um conceito de time
-            $time = $times->find($id); ////encontro o time que eu quero, contando que esteja no banco
+            $time = $times->find($id)->where('id','=', $id)->first(); ////encontro o time que eu quero, contando que esteja no banco
 
 
 
 
-            
+
             //Listo os times que tenho no banco
             $alltimes = Time::select()->get();
             echo "<hr>";
@@ -34,7 +27,7 @@ class Main extends Controller
                 echo $todos_times->nome_time . " | ";
             }
 
-            
+
 
 
 
@@ -43,7 +36,7 @@ class Main extends Controller
             echo  "<b>Time selecionado:</b> " . $time->nome_time; //Aqui diz o nome do time
             echo "<hr>";
 
-            
+
 
 
 
@@ -57,11 +50,11 @@ class Main extends Controller
             echo "<hr>";
 
 
-            
 
 
 
-            
+
+
 
 
             //Dados de jogadores desse time
@@ -69,15 +62,15 @@ class Main extends Controller
             $jogadores = $elenco->jogadordoTime;  //traga dados
 
             //Dados da seleção que este jogador pertence
-            $selecao;
+
              //traga dados
-            
+
             foreach($jogadores as $jogador){ //para cada jogador, faça
                 echo $jogador->nome_jogador."  |   ";
                 echo $jogador->posicao. "   |   ";
                 echo $jogador->numero."  |  ";
                 echo "Convocado pela seleção: <br><br>" . $jogador->convocacao;
-                
+
             }
 
 
