@@ -3,14 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
-use Illuminate\Http\Request;
 
 class RegistroJogador extends Controller
 {
     //===========================================================================
-    
 
-    public function registrojogador($id_time, $id_selecao, $_jogador, $pos, $num){
+    public $id_time = 2;
+    public $id_selecao = 1;
+    public $_jogador = "Gabriel Barbosa";
+    public $pos = "CA";
+    public $num = "9";
+
+
+
+
+
+    public function registrojogador(){
         //cadastro um jogador
         $novo_jogador = new Player();
 

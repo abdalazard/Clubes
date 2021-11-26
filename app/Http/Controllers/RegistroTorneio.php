@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 
 class RegistroTorneio extends Controller
 {
-    public function registroTorneio($nome_time){
+
+    public $torneio = "La liga";
+
+    public function registroTorneio(){
         //cadastro de torneio
         $builder = new Torneio();
-        $builder->nome_torneio = $this->nome_time;
+        $builder->nome_torneio = $this->torneio;
         $novo_torneio = $builder;
         $novo_torneio->save();
 

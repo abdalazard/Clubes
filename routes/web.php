@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Main;
+use App\Http\Controllers\RegistroClube;
+use App\Http\Controllers\RegistroJogador;
+use App\Http\Controllers\RegistroSelecao;
+use App\Http\Controllers\RegistroTorneio;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get("/registroselecao", [Main::class, "registroselecao"]);
-Route::get("/registroclube", [Main::class, "registroclube"]);
-Route::get("/registrojogador", [Main::class, "registrojogador"]);
-Route::get("/registrotorneio", [Main::class, "registroTorneio"]);
+Route::get("/registroselecao", [RegistroSelecao::class, "registroselecao"]);
+Route::get("/registroclube", [RegistroClube::class, "registroclube"]);
+Route::get("/registrojogador", [RegistroJogador::class, "registroJogador"]);
+Route::get("/registrotorneio", [RegistroTorneio::class, "registroTorneio"]);
 
 Route::get("/", [Main::class, "time"])->name('home');

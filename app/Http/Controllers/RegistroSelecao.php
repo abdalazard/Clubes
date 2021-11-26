@@ -10,7 +10,7 @@ class RegistroSelecao extends Controller
     //===========================================================================
 
      //cadastro de clube
-    public $_selecao;
+    public $_selecao = "Brasil";
 
      public function registroSelecao($_selecao){
         $nova_selecao = new Selecao();
