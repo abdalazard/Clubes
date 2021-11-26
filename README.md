@@ -1,4 +1,4 @@
-[corinthians-caiu-para-a-setima-posicao-na-vc941w.png](https://postimg.cc/bZqtz1nX)
+[![corinthians-caiu-para-a-setima-posicao-na-vc941w.png](https://i.postimg.cc/htdb1rPG/corinthians-caiu-para-a-setima-posicao-na-vc941w.png)](https://postimg.cc/bZqtz1nX)
 
 Projeto de estudos pessoal
 
