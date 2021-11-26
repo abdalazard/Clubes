@@ -11,7 +11,7 @@ class Main extends Controller
 
 
     public function time(){
-            $id = 1;
+            $id = 2;
             $times = Time::all();  //transformo a variavel em um conceito de time
             $time = $times->find($id)->where('id','=', $id)->first(); ////encontro o time que eu quero, contando que esteja no banco
 
@@ -69,8 +69,17 @@ class Main extends Controller
                 echo $jogador->nome_jogador."  |   ";
                 echo $jogador->posicao. "   |   ";
                 echo $jogador->numero."  |  ";
-                echo "Convocado pela seleção: <br><br>" . $jogador->convocacao;
+                $convocacao =  $jogador->selecaoJogador;
 
+                if($convocacao)
+                {
+                    echo "Convocado pela seleção: " . $convocacao->nome_selecao. "<br><br>";
+                }
+                else
+                {
+                    echo "Jogador não convocado <br><br>";
+
+                }
             }
 
 
