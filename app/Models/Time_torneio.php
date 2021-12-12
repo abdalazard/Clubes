@@ -9,10 +9,10 @@ use App\Models\Torneio;
 
 class Time_torneio extends Model
 {
+    protected $table = "time_torneio";
 
 
-
-    public function time() : HasMany
+    public function clubes() : HasMany
     {
 
 

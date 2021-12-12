@@ -8,10 +8,26 @@ use Illuminate\Http\Request;
 
 class ControleTorneio extends Controller
 {
+
+    public $nome_time;
+    public $builder;
+    private $torneioId;
+
+    public function index(){
+
+        //Tabela time_torneio
+        $torneios  = Torneio::all();
+        
+        return view('/home', ['torneios' => $torneios]);
+    
+    }
+
     public function create($nome_time){
+
+        
         //cadastro de torneio
         $builder = new Torneio();
-        $builder->nome_torneio = $this->nome_time;
+        $builder->nome_torneio = $this->torneio;
         $novo_torneio = $builder;
         $novo_torneio->save();
 
@@ -21,6 +37,12 @@ class ControleTorneio extends Controller
         }else{
             echo "!ok";
         }
+
+    }
+
+    public function detalheTorneio($torneioId){
+
+        
 
     }
 }
