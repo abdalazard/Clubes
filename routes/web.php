@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\Main;
+use App\Http\Controllers\Selecao\ControleSelecao;
+use App\Http\Controllers\Time\ControleTime;
+use App\Http\Controllers\Torneio\ControleTorneio;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Registro de seleção
+Route::post("/cadastrar/registroclube", [ControleSelecao::class, "create"]);
 
-Route::get("/registroselecao", [Main::class, "registroselecao"]);
-Route::get("/registroclube", [Main::class, "registroclube"]);
-Route::get("/registrojogador", [Main::class, "registrojogador"]);
-Route::get("/registrotorneio", [Main::class, "registroTorneio"]);
+//Registro de clube
+Route::post("/cadastrar/clube", [ControleTime::class, "create"]);
 
-Route::get("/", [Main::class, "time"])->name('home');
+//Registra um jogador
+Route::post("/cadastrar/registrojogador", [ControleJogador::class, "create"]);
+
+//Registra um torneio
+Route::post("/cadastrar/registrotorneio", [ControleTorneio::class, "create"]);
+
+//Lista times com todos os seus dados(torneios, jogadores e se estes jogadores foram convocados)
+Route::get("/", [ControleTime::class, "list"])->name('home');

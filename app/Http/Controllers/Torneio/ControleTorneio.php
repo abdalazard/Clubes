@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Torneio;
 
+use App\Http\Controllers\Controller;
 use App\Models\Torneio;
 use Illuminate\Http\Request;
 
-class RegistroTorneio extends Controller
+class ControleTorneio extends Controller
 {
-    public function registroTorneio($nome_time){
+    public function create($nome_time){
         //cadastro de torneio
         $builder = new Torneio();
         $builder->nome_torneio = $this->nome_time;
@@ -22,6 +23,4 @@ class RegistroTorneio extends Controller
         }
 
     }
-
-
 }
