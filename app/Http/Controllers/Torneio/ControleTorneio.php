@@ -8,19 +8,54 @@ use Illuminate\Http\Request;
 
 class ControleTorneio extends Controller
 {
-    public function create($nome_time){
-        //cadastro de torneio
-        $builder = new Torneio();
-        $builder->nome_torneio = $this->nome_time;
-        $novo_torneio = $builder;
-        $novo_torneio->save();
 
-        if($novo_torneio){
+    public $nome_time;
+    public $torneio_pais;
+    private $torneioId;
 
-            return redirect()->route('home');
-        }else{
-            echo "!ok";
+    public function index(){
+
+        //Tabela time_torneio
+        $torneios  = Torneio::all();
+        
+        return view('/home', ['torneios' => $torneios]);
+    
+    }
+
+    public function create(){
+        //redireciona para view
+        return view('/criartorneio');
+    }
+
+    public function store(Request $request){
+
+        $torneio = new Torneio;
+
+        $validate = $request->validate([
+            'nome_torneio' => 'required',
+            'pais' => 'required'
+        ]);
+        //valido os dados
+
+        if($validate){  //se validade
+
+            $torneio->nome_torneio = $request->nome_torneio;
+            $torneio->pais_torneio = $request->pais;
+
+            $torneio->save(); //salvo os campos da tabela do banco, com os dados que trouxe da request
+            
+            $msg = "Ok!";
+            return view('home', ['msg' => $msg]);
         }
 
     }
+    
+
+    public function detalheTorneio($torneioId){
+
+        $torneio = Torneio::where('id', $torneioId)->first();
+
+       return view('torneio', ['torneio' => $torneio]);
+
+        }
 }

@@ -20,6 +20,7 @@ class CreatePlayerTable extends Migration
             $table->string('nome_jogador');
             $table->string('posicao');
             $table->string('numero')->nullable();
+            $table->string('pais');
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
         });

@@ -14,6 +14,7 @@ class CreateTimetorneioTable extends Migration
     public function up()
     {
         Schema::create('Time_torneio', function (Blueprint $table) {
+            $table->foreignId('id');
             $table->foreignId("torneio_id");
             $table->foreignId("time_id");
         });
