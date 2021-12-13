@@ -16,6 +16,7 @@ class CreateTimeTable extends Migration
         Schema::create('Times', function (Blueprint $table) {
             $table->id('id');
             $table->string("nome_time");
+            $table->string('pais_time');
             $table->dateTime("created_at")->nullable();
             $table->dateTime("updated_at")->nullable();
         });

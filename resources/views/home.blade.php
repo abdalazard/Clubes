@@ -14,12 +14,23 @@
         <h1>Futebol</h1>
         <div>
             <h3>Torneios</h3>
-            @foreach ( $torneios as $torneio)
 
+            <!-- Mostra todos os torneios -->
+            @foreach ($torneios as $torneio)
+                <!-- cada torneio tem um id, cada torneio tem um botão responsavel de mostrar os detalhes deste torneio -->
                  <a href="{{route('acessoTorneio', ['id' => $torneio->id])}}" type="button" class="btn btn-primary">{{$torneio->nome_torneio}}</a>
                  <br>
                  <br>
             @endforeach
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div>
+            <a href="{{route("create")}}" role="button" class="btn btn-success">Cadastrar Torneio</a>
         </div>
     </div>
 </body>

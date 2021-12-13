@@ -16,6 +16,7 @@ class CreateTorneioTable extends Migration
         Schema::create('Torneio', function (Blueprint $table) {
             $table->id('id');
             $table->string("nome_torneio");
+            $table->string("pais_torneio");
             $table->dateTime("created_at")->nullable();
             $table->dateTime("updated_at")->nullable();
         });

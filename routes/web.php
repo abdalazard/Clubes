@@ -16,14 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get("/registroselecao", [Main::class, "registroselecao"]);
-Route::get("/registroclube", [Main::class, "registroclube"]);
-Route::get("/registrojogador", [Main::class, "registrojogador"]);
+//acessa o homepage, que mostra os torneios em forma de botão
+Route::get("/", [ControleTorneio::class, 'index'])->name('home');
+
+//acessa a criação de torneio
+Route::get('/criartorneio', [ControleTorneio::class, "create"])->name('create');
+
+//Cadastra um torneio
+Route::post('/grava_torneio', [ControleTorneio::class, 'store'])->name('grava_torneio');
 
 
 //detalhe os time do torneio
-Route::get("/torneio/{id}", [ControleTorneio::class, "detalheTorneio"])->name('acessoTorneio');
+Route::get("/acessoTorneio/{id}", [ControleTorneio::class, "detalheTorneio"])->name('acessoTorneio');
 
-
-//acessa o homepage, que mostra os torneios em forma de botão
-Route::get("/", [ControleTorneio::class, 'index'])->name('home');
