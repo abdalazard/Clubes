@@ -15,17 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 //acessa o homepage, que mostra os torneios em forma de botão
 Route::get("/", [ControleTorneio::class, 'index'])->name('home');
 
-//acessa a criação de torneio
-Route::get('/criartorneio', [ControleTorneio::class, "create"])->name('create');
-
-//Cadastra um torneio
-Route::post('/grava_torneio', [ControleTorneio::class, 'store'])->name('grava_torneio');
-
-
-//detalhe os time do torneio
+//detalhe dos torneios(times, e etc)
 Route::get("/acessoTorneio/{id}", [ControleTorneio::class, "detalheTorneio"])->name('acessoTorneio');
 
+//acessa a criação de um novo torneio 
+Route::get('/criartorneio', [ControleTorneio::class, "create"])->name('create');
+        //Cadastra um torneio
+        Route::post('/grava_torneio', [ControleTorneio::class, 'store'])->name('grava_torneio');
