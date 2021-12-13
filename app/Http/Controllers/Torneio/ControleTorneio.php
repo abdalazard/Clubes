@@ -17,9 +17,9 @@ class ControleTorneio extends Controller
 
         //Tabela time_torneio
         $torneios  = Torneio::all();
-        
+
         return view('/home', ['torneios' => $torneios]);
-    
+
     }
 
     public function create(){
@@ -43,13 +43,13 @@ class ControleTorneio extends Controller
             $torneio->pais_torneio = $request->pais;
 
             $torneio->save(); //salvo os campos da tabela do banco, com os dados que trouxe da request
-            
+
             $msg = "Ok!";
             return view('home', ['msg' => $msg]);
         }
 
     }
-    
+
 
     public function detalheTorneio($torneioId){
 
