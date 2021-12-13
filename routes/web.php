@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\Torneio\ControleTorneio;
+use App\Http\Controllers\Main;
+use App\Http\Controllers\RegistroClube;
+use App\Http\Controllers\RegistroJogador;
+use App\Http\Controllers\RegistroSelecao;
+use App\Http\Controllers\RegistroTorneio;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//acessa o homepage, que mostra os torneios em forma de botão
-Route::get("/", [ControleTorneio::class, 'index'])->name('home');
 
-//detalhe dos torneios(times, e etc)
-Route::get("/acessoTorneio/{id}", [ControleTorneio::class, "detalheTorneio"])->name('acessoTorneio');
+Route::get("/registroselecao", [RegistroSelecao::class, "registroselecao"]);
+Route::get("/registroclube", [RegistroClube::class, "registroclube"]);
+Route::get("/registrojogador", [RegistroJogador::class, "registroJogador"]);
+Route::get("/registrotorneio", [RegistroTorneio::class, "registroTorneio"]);
 
-//acessa a criação de um novo torneio 
-Route::get('/criartorneio', [ControleTorneio::class, "create"])->name('create');
-        //Cadastra um torneio
-        Route::post('/grava_torneio', [ControleTorneio::class, 'store'])->name('grava_torneio');
+Route::get("/", [Main::class, "time"])->name('home');

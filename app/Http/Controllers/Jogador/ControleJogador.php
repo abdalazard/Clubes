@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Jogador;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Player;
 
-class ControleJogador extends Controller{
+class RegistroJogador extends Controller
+{
+    //===========================================================================
 
     public $id_time = 2;
     public $id_selecao = null;
@@ -13,11 +14,11 @@ class ControleJogador extends Controller{
     public $pos = "PTE";
     public $num = "27";
 
-    //Cria jogador
-    public function create($id_time, $id_selecao, $_jogador, $pos, $num){
 
-    
 
+
+
+    public function registrojogador(){
         //cadastro um jogador
         $novo_jogador = new Player();
 
@@ -35,6 +36,6 @@ class ControleJogador extends Controller{
             echo "!ok";
         }
 
+
     }
-    
 }
