@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Main;
 use App\Http\Controllers\Torneio\ControleTorneio;
 use Illuminate\Support\Facades\Route;
 
