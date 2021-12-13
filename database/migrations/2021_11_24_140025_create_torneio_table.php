@@ -14,7 +14,7 @@ class CreateTorneioTable extends Migration
     public function up()
     {
         Schema::create('Torneio', function (Blueprint $table) {
-            $table->id('id');
+            $table->bigIncrements('id');
             $table->string("nome_torneio");
             $table->string("pais_torneio");
             $table->dateTime("created_at")->nullable();

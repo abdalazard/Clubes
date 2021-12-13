@@ -10,16 +10,19 @@
 <body>
     <br><br>
     <div class="container">
+
         <h1><a href="{{route('home')}}">Futebol</a></h1>
 
-        <form action="/grava_torneio" method="post">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                {!! csrf_field() !!}
 
+        <h3>Inscrever Equipe</h3>
+
+        <form action="{{route('grava_equipe')}}" method="post">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                {!! csrf_field() !!}
             <div class="form-group">
-                <label>Nome do torneio</label>
+                <label>Nome do time</label>
                 <div class="row">
-                    <input type="text" name="nome_torneio" required >
+                    <input type="text" name="nome_time" required >
                 </div>
             </div>
 
@@ -30,9 +33,18 @@
                 </div>
 
             </div>
+            <!-- id do torneio escondido -->
+            <div class="form-group" hidden>
+                <div class="row">
+                    <input type="text" name="torneio_id" value="{{$torneio_id}}" >
+                </div>
+
+            </div>
+
+
             <a href="{{url()->previous()}}" class="btn btn-default">Voltar</a>
 
-            <button type="submit" class="btn btn-primary">Criar Torneio</button>
+            <button type="submit" class="btn btn-primary">Inscrever</button>
 
             <div>
             </div>
