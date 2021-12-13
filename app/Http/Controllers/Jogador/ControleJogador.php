@@ -1,41 +1,56 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Jogador;
 
+use App\Http\Controllers\Controller;
+use App\Models\Equipes;
 use App\Models\Player;
+use Illuminate\Http\Request;
 
-class RegistroJogador extends Controller
+class ControleJogador extends Controller
 {
-    //===========================================================================
 
-    public $id_time = 2;
-    public $id_selecao = null;
-    public $_jogador = "Bruno Henrique";
-    public $pos = "PTE";
-    public $num = "27";
+    public function create($time_id){
 
+        $time = Equipes::where("id", $time_id)->first();
 
-
-
-
-    public function registrojogador(){
-        //cadastro um jogador
-        $novo_jogador = new Player();
-
-        $novo_jogador->time_id = $this->id_time;
-        $novo_jogador->selecao_id = $this->id_selecao;
-        $novo_jogador->nome_jogador = $this->_jogador;
-        $novo_jogador->posicao = $this->pos;
-        $novo_jogador->numero = $this->num;
-        $novo_jogador->save();
-
-        if($novo_jogador->save()){
-            return redirect()->route('home');
-        }
-        else{
-            echo "!ok";
-        }
-
+       //redireciona para a pagina de registro de jogadores o tim em questão
+       return view('/insereJogador', ['time' => $time]);
 
     }
+
+    public function store(Request $request){
+
+
+
+        $validate = $request->validate([
+            'nome_jogador' => 'required',
+            'posicao' => 'required',
+            'camisa' => 'required',
+            'pais' => 'required',
+            'time_id' => 'required',
+            'selecao' => 'nullable'
+        ]);
+
+        if($validate){
+            $novo_jogador = new Player();
+
+            $novo_jogador->time_id = $request->time_id;
+            $novo_jogador->nome_jogador = $request->nome_jogador;
+            $novo_jogador->posicao = $request->posicao;
+            $novo_jogador->numero = $request->camisa;
+            $novo_jogador->pais = $request->pais;
+            $novo_jogador->selecao_id = $request->selecao;
+
+            $novo_jogador->save();
+            $msg = "Jogador cadastrado!";
+
+        }else{
+            $msg = "Erro ao cadastrar jogador!";
+
+        }
+
+        return redirect()->route('home');
+    }
+
 }

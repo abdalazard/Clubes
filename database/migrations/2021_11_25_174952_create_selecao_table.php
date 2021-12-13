@@ -14,7 +14,7 @@ class CreateSelecaoTable extends Migration
     public function up()
     {
         Schema::create('Selecao', function (Blueprint $table) {
-            $table->id('id');
+            $table->bigIncrements('id');
             $table->string("nome_selecao");
             $table->dateTime("created_at")->nullable();
             $table->dateTime("updated_at")->nullable();

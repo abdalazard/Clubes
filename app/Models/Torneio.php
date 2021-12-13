@@ -3,19 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use App\Models\Time_torneio;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Torneio extends Model
 {
 
     protected $table = "torneio";
 
-    public function times() : BelongsToMany
+    public function equipes() : HasMany
     {
 
-        return $this->belongsToMany(Time::class, 'time_torneio', 'torneio_id', 'id');
+        return $this->hasMany(Equipes::class, 'torneio_id', 'id');
     }
 
 }
