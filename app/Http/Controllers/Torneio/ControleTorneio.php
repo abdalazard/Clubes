@@ -44,10 +44,11 @@ class ControleTorneio extends Controller
 
             $torneio->save(); //salvo os campos da tabela do banco, com os dados que trouxe da request
             
-            return view('/', ["msg" => "Torneio gravado com sucesso!"]);
+            $msg = "Ok!";
+            return view('home', ['msg' => $msg]);
         }
 
-        }
+    }
     
 
     public function detalheTorneio($torneioId){
@@ -56,5 +57,5 @@ class ControleTorneio extends Controller
 
        return view('torneio', ['torneio' => $torneio]);
 
-    }
+        }
 }

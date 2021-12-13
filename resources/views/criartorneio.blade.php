@@ -12,7 +12,10 @@
     <div class="container">
         <h3>Criar Torneio</h3>
         
-        <form action="{{route('grava_torneio')}}" method="post">
+        <form action="/grava_torneio" method="post">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                {!! csrf_field() !!}
+
             <div class="form-group">
                 <label>Nome do torneio</label>
                 <div class="row">
