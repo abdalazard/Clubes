@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 //Torneio
     //acessa o homepage, que mostra os torneios em forma de botão
     Route::get("/", [ControleTorneio::class, 'index'])->name('home');
+        //Exclui torneio do sistema
+        Route::get('excluir_torneio/{id_torneio}', [ControleTorneio::class, 'delete'])->name('excluirTorneio');
 
     //acessa a criação de um novo torneio
     Route::get('/criartorneio', [ControleTorneio::class, "create"])->name('criartorneio');
@@ -35,10 +37,16 @@ use Illuminate\Support\Facades\Route;
                             //Inscreve os times no torneio em questão
                             Route::post('/grava_equipe', [ControleEquipe::class, "store"])->name('grava_equipe');
 
+                //Exclui time da competição
+                Route::get('excluir_time/{id_time}', [ControleEquipe::class, 'delete'])->name('excluirTime');
+
+
                 //Acessa Dados dos times(Elenco e etc)
-                Route::get('/detalhe_time/{id_time}', [ControleEquipe::class, 'listarJogadores'])->name('lista_jogadores');
+                Route::get('/detalhe_time/{id_time}', [ControleEquipe::class, 'listarJogadores'])->name('detalheTime');
                         //Jogadores
                             //Redireciona para registrar um jogador no time em questão
                             Route::get('/insereJogador/{time_id}', [ControleJogador::class, 'create'])->name("insereJogador");
                                         //Cadastra jogadores no time em questão
                                         Route::post('/grava_jogador', [ControleJogador::class, 'store'])->name('grava_jogador');
+                           //Excluir jogador do time
+                           Route::get('excluir_jogador/{id_jogador}', [ControleJogador::class, 'delete'])->name('excluir_jogador');

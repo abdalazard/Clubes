@@ -16,13 +16,23 @@
             <h3>Torneios</h3>
 
             <!-- Mostra todos os torneios -->
+                <table>
+                    <tr>
+                        <th>Torneio</th>
+                        <th>Exclusão</th>
+
+                    </tr>
 
                 @foreach ($torneios as $torneio)
-                    <!-- cada torneio tem um id, cada torneio tem um botão responsavel de mostrar os detalhes deste torneio -->
-                    <a href="{{route('acessoTorneio', ['id' => $torneio->id])}}" type="button" class="btn btn-primary">{{$torneio->nome_torneio}}</a>
-                    <br>
-                    <br>
+                    <tr>
+                        <!-- cada torneio tem um id, cada torneio tem um botão responsavel de mostrar os detalhes deste torneio -->
+                        <td><a href="{{route('acessoTorneio', ['id' => $torneio->id])}}" type="button" class="btn btn-primary">{{$torneio->nome_torneio}}</a></td>
+                        <td><a  href="{{route('excluirTorneio', ['id_torneio' => $torneio->id])}}" type="button" class="btn btn-danger">Excluir Torneio</a></td>
+                        <br>
+                        <br>
+                    </tr>
                 @endforeach
+            </table>
         </div>
 
         <br>
@@ -32,6 +42,7 @@
 
         <div>
             <a href="{{route("criartorneio")}}" role="button" class="btn btn-success">Cadastrar Torneio</a>
+            
         </div>
     </div>
 </body>

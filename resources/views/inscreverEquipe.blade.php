@@ -29,14 +29,15 @@
             <div class="form-group">
                 <label>País</label>
                 <div class="row">
-                    <input type="text" name="pais" required >
+                    <input type="text" value="{{$torneio->pais_torneio}}" disabled required>
+                    <input type="text" name="pais" value="{{$torneio->pais_torneio}}" hidden required>
                 </div>
 
             </div>
             <!-- id do torneio escondido -->
             <div class="form-group" hidden>
                 <div class="row">
-                    <input type="text" name="torneio_id" value="{{$torneio_id}}" >
+                    <input type="text" name="torneio_id" value="{{$torneio->id}}">
                 </div>
 
             </div>
@@ -47,6 +48,12 @@
             <button type="submit" class="btn btn-primary">Inscrever</button>
 
             <div>
+                <div>@if (!isset($msg))
+                    
+                    @else
+                        {{$msg}}    
+                    @endif
+                </div>
             </div>
 
         </form>

@@ -53,7 +53,7 @@
 
                 <label>Time</label>
                 <div class="row">
-                    <input type="text" name="" value="{{$time->nome_time}}">
+                    <input type="text" name="" value="{{$time->nome_time}}" disabled>
                 </div>
                 <div class="row" hidden>
                     <input type="text" name="time_id" value="{{$time->id}}">

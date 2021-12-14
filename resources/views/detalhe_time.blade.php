@@ -30,6 +30,7 @@
                 <th>Camisa</th>
                 <th>Nacionalidade</th>
                 <th>Convocação</th>
+                <th>Exclusão</th>
             </tr>
 
             @foreach ($jogadores as $jogador)
@@ -40,6 +41,7 @@
                 <td>{{$jogador->numero}}</td>
                 <td>{{$jogador->pais}}</td>
                 <td>{{$jogador->selecao_id}}</td>
+                <td><a href="{{route('excluir_jogador', ['id_jogador' => $jogador->id])}}" class="btn btn-danger">Excluir jogador</a></td>
             </tr>
 
             @endforeach

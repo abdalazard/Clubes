@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Time;
 
 use App\Http\Controllers\Controller;
 use App\Models\Equipes;
+use App\Models\Torneio;
 use Illuminate\Http\Request;
 
 class ControleEquipe extends Controller
 {
 
     public function create($idTorneio){
+        $torneio = Torneio::where('id', $idTorneio)->first();
+
         //redireciona para a pagina de criação de times
-        return view('/inscreverEquipe', ['torneio_id' => $idTorneio]);
+        return view('/inscreverEquipe', ['torneio' => $torneio]);
 
     }
 
@@ -20,7 +23,9 @@ class ControleEquipe extends Controller
         $time = Equipes::where('id', $id_time)->first();
         $jogadores = $time->jogadores()->get();
         //verifico o time no model Equipes e depois, dentro desta equipe, obtenho os jogadores vinculados ao time
-        return view('/detalhe_time', ['jogadores' => $jogadores, 'time' => $time->nome_time, 'Idtime' => $time->id]);
+        return view('/detalhe_time', ['jogadores' => $jogadores, 
+                                      'time' => $time->nome_time, 
+                                      'Idtime' => $time->id]);
     }
 
     public function store(Request $request){
@@ -50,7 +55,15 @@ class ControleEquipe extends Controller
 
             return redirect()->route('acessotorneio', ['msg' => $msg]);
         }
-
-
     }
+
+    public function delete($id_time){
+        $time = Equipes::where('id', $id_time)->first();
+        $torneioId = $time->torneio_id;
+        
+        $time->delete();
+
+        return redirect()->route('acessoTorneio', ['id' => $torneioId]);
+            
+      }
 }

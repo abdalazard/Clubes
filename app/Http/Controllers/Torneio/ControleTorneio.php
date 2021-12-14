@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Torneio;
 
 use App\Http\Controllers\Controller;
+use App\Models\Equipes;
 use App\Models\Torneio;
 use Illuminate\Http\Request;
 
 class ControleTorneio extends Controller
 {
-
-    public $nome_time;
-    public $torneio_pais;
-    private $torneioId;
 
     public function index(){
 
@@ -68,4 +65,12 @@ class ControleTorneio extends Controller
         // Retorne para a view Torneio, o id do torneio em questão e seus times
        }
 
-}
+    public function delete($id_torneio){
+        $torneio = Torneio::where('id', $id_torneio)->first();
+        $torneio->delete();
+
+        return redirect()->route('home');
+    }
+
+
+        }

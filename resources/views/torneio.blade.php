@@ -38,13 +38,14 @@
                             <tr>
                                 <th>Time</th>
                                 <th>Elenco</th>
+                                <th>Excluir Time</th>
                             </tr>
 
                             @foreach ($equipes as  $equipe)
                             <tr>
                                 <td>{{$equipe->nome_time}}</td>
-                                <td><a href="{{route('lista_jogadores', ['id_time' => $equipe->id])}}" class="btn btn-primary">Ver time</a></td>
-
+                                <td><a href="{{route('detalheTime', ['id_time' => $equipe->id])}}" class="btn btn-primary">Ver time</a></td>
+                                <td><a href="{{route('excluirTime', ['id_time' => $equipe->id])}}" class="btn btn-danger">Excluir time</a></td>
                             </tr>
 
                             @endforeach

@@ -10,16 +10,17 @@ use Illuminate\Http\Request;
 class ControleJogador extends Controller
 {
 
-    public function create($time_id){
+    public function create($time_id)
+    {
 
         $time = Equipes::where("id", $time_id)->first();
 
-       //redireciona para a pagina de registro de jogadores o tim em questão
-       return view('/insereJogador', ['time' => $time]);
-
+        //redireciona para a pagina de registro de jogadores o tim em questão
+        return view('/insereJogador', ['time' => $time]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
 
 
@@ -32,7 +33,7 @@ class ControleJogador extends Controller
             'selecao' => 'nullable'
         ]);
 
-        if($validate){
+        if ($validate) {
             $novo_jogador = new Player();
 
             $novo_jogador->time_id = $request->time_id;
@@ -44,13 +45,19 @@ class ControleJogador extends Controller
 
             $novo_jogador->save();
             $msg = "Jogador cadastrado!";
-
-        }else{
+        } else {
             $msg = "Erro ao cadastrar jogador!";
-
         }
 
-        return redirect()->route('home');
+        return redirect()->route('detalheTime', ["id_time" => $novo_jogador->time_id]);
     }
 
+    public function delete($id_jogador)
+    {
+        $jogador = Player::where('id', $id_jogador)->first();
+        $time_id = $jogador->time_id;
+        $jogador->delete();
+
+        return redirect()->route('detalheTime', ['id_time' => $time_id]);
+    }
 }
