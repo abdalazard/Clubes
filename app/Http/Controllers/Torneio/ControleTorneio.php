@@ -68,14 +68,14 @@ class ControleTorneio extends Controller
             'equipes' => $times
             ]);
         // Retorne para a view Torneio, o id do torneio em questão e seus times
-    }
+       }
 
     public function delete($id_torneio){
 
         //Seleciono o torneio pelo ID
         $torneio = Torneio::where('id', $id_torneio)->first();
 
-        //Se o torneio for encontrado
+        // Se o torneio for encontrado
         if($torneio){
             //Pegue os times inscritos no torneio(com o id do torneio), através de um relacionamento
             $times = $torneio->equipes;
@@ -92,7 +92,7 @@ class ControleTorneio extends Controller
                 //Exclua o time da tabela Equipes
                 $time->delete();
             }
-            //Exclua o torneio da tabela Torneios
+            //Exclua o torneio da tabela
             $torneio->delete();
 
         }

@@ -17,6 +17,11 @@ class Equipes extends Model{
         return $this->belongsToMany(Torneio::class);
     }
 
+    public function torcidasSelecao(): BelongsToMany
+    {
+        return $this->BelongsToMany(Selecao::class, "selecao_time", "time_id");
+    }
+
     public function jogadores(): HasMany
     {
         return $this->hasMany(Player::class, 'time_id', 'id');

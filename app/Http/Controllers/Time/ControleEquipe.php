@@ -37,6 +37,7 @@ class ControleEquipe extends Controller
         $validate = $request->validate([
             'nome_time' => 'required',
             'pais' => 'required',
+            'torcedores' => 'integer|required',
             'torneio_id' => 'required'
         ]);
         //dados validados
@@ -44,8 +45,8 @@ class ControleEquipe extends Controller
         if($validate){
             $novo_time->nome_time = $request->nome_time;
             $novo_time->pais_time = $request->pais;
+            $novo_time->torcedores = $request->torcedores;
             $novo_time->torneio_id = $request->torneio_id;
-
             $novo_time->save();
 
             $msg = "Time inscrito com sucesso!";

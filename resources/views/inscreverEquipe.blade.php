@@ -27,6 +27,14 @@
             </div>
 
             <div class="form-group">
+                <label>Torcedores</label>
+                <div class="row">
+                    <input type="text" name="torcedores" value="{{$torneio->torcedores}}" required>
+                </div>
+
+            </div>
+
+            <div class="form-group">
                 <label>País</label>
                 <div class="row">
                     <input type="text" value="{{$torneio->pais_torneio}}" disabled required>
@@ -49,9 +57,9 @@
 
             <div>
                 <div>@if (!isset($msg))
-                    
+
                     @else
-                        {{$msg}}    
+                        {{$msg}}
                     @endif
                 </div>
             </div>

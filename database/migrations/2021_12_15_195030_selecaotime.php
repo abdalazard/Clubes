@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSelecaoTable extends Migration
+class Selecaotime extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateSelecaoTable extends Migration
      */
     public function up()
     {
-        Schema::create('Selecao', function (Blueprint $table) {
+        Schema::create('selecao_time', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("nome_selecao");
-            $table->bigInteger('torcedores');
-            $table->dateTime("created_at")->nullable();
-            $table->dateTime("updated_at")->nullable();
+            $table->foreignId('selecao_id')->references('id')->on('selecao');
+            $table->foreignId('time_id')->references('id')->on('time');
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
         });
+
     }
 
     /**
@@ -29,6 +30,6 @@ class CreateSelecaoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Selecao');
+        Schema::dropIfExists('selecao_time');
     }
 }

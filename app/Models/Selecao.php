@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Selecao extends Model
@@ -18,5 +19,9 @@ class Selecao extends Model
 
     }
 
-  
+
+    public function torcidasEquipes(): BelongsToMany
+    {
+        return $this->BelongsToMany(Equipes::class, "selecao_time", "selecao_id");
+    }
 }

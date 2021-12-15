@@ -19,6 +19,7 @@ class CreateEquipeTable extends Migration
             $table->string("nome_time");
             $table->string('pais_time');
             $table->bigInteger('torneio_id')->references('id')->on('torneio');
+            $table->bigInteger('torcedores');
             $table->dateTime("created_at")->nullable();
             $table->dateTime("updated_at")->nullable();
         });

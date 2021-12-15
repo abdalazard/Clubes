@@ -14,7 +14,6 @@ class ControleSelecao extends Controller
         $selecao = Selecao::where('id', $id)->first();
         $jogadores = $selecao->jogadordaSelecao()->where('selecao_id', $selecao->id)->get();
 
-
         return view('acessoSelecao', ["jogadores" => $jogadores, "selecao" => $selecao]);
     }
 
