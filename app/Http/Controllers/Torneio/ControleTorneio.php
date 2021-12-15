@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Torneio;
 
 use App\Http\Controllers\Controller;
-use App\Models\Equipes;
+use App\Models\Selecao;
 use App\Models\Torneio;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,11 @@ class ControleTorneio extends Controller
         //Tabela time_torneio
         $torneios  = Torneio::all();
 
-        return view('/home', ['torneios' => $torneios]);
+        //select com todas as seleções do banco
+        $selecoes = Selecao::all();
+
+        //Envia os dois objetos para a pagina 'home'
+        return view('home', ['torneios' => $torneios, 'selecoes' => $selecoes]);
 
     }
 
@@ -50,27 +54,51 @@ class ControleTorneio extends Controller
     }
 
     public function detalheTorneio($torneioId){
+
         //Detalhe dados do torneio em questão, como por exemplo os times incritos
 
-        $torneioId = Torneio::where('id', $torneioId)->first();
+        $torneio = Torneio::where('id', $torneioId)->first();
         //dentro do model Torneio, pegue o primeiro registro onde a coluna 'id' é igual a variavel $torneioId
 
-        $times = $torneioId->equipes()->get();
+        $times = $torneio->equipes()->get();
         //Com o id do torneio em questão, vá no método equipes, já com a relação declarada no model Torneio, e obtenha os dados
 
         return view('torneio', [
-            'torneio' => $torneioId,
+            'torneio' => $torneio,
             'equipes' => $times
             ]);
         // Retorne para a view Torneio, o id do torneio em questão e seus times
-       }
-
-    public function delete($id_torneio){
-        $torneio = Torneio::where('id', $id_torneio)->first();
-        $torneio->delete();
-
-        return redirect()->route('home');
     }
 
+    public function delete($id_torneio){
+
+        //Seleciono o torneio pelo ID
+        $torneio = Torneio::where('id', $id_torneio)->first();
+
+        //Se o torneio for encontrado
+        if($torneio){
+            //Pegue os times inscritos no torneio(com o id do torneio), através de um relacionamento
+            $times = $torneio->equipes;
+            //Para cada time inscrito no torneio
+            foreach($times as $time){
+                //Acesse os jogadores registrados no time(com o id do time), através de um relacionamento
+                $jogadores = $time->jogadores;
+
+                //para cada jogador presente no time, com o id do time(que por sua vez tem o id do torneio)
+                foreach($jogadores as $jogador){
+                    //exclua da tabela  Player
+                    $jogador->delete();
+                }
+                //Exclua o time da tabela Equipes
+                $time->delete();
+            }
+            //Exclua o torneio da tabela Torneios
+            $torneio->delete();
 
         }
+
+        return redirect()->route('home');
+        }
+
+
+}

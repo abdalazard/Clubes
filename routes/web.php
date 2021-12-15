@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Jogador\ControleJogador;
+use App\Http\Controllers\Selecao\ControleSelecao;
 use App\Http\Controllers\Time\ControleEquipe;
 use App\Http\Controllers\Torneio\ControleTorneio;
 use Illuminate\Support\Facades\Route;
@@ -17,10 +18,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Torneio
-    //acessa o homepage, que mostra os torneios em forma de botão
+//Seleção
+    //acessa a homepage, que mostra os torneios em forma de botão
+    //Também envia para a homepage uma lista das seleções presentes no banco
     Route::get("/", [ControleTorneio::class, 'index'])->name('home');
         //Exclui torneio do sistema
         Route::get('excluir_torneio/{id_torneio}', [ControleTorneio::class, 'delete'])->name('excluirTorneio');
+        //Exclui seleção da lista
+        Route::get('excluir_selecao/{id}', [ControleSelecao::class, 'delete'])->name('excluirSelecao');
+
 
     //acessa a criação de um novo torneio
     Route::get('/criartorneio', [ControleTorneio::class, "create"])->name('criartorneio');
@@ -50,3 +56,14 @@ use Illuminate\Support\Facades\Route;
                                         Route::post('/grava_jogador', [ControleJogador::class, 'store'])->name('grava_jogador');
                            //Excluir jogador do time
                            Route::get('excluir_jogador/{id_jogador}', [ControleJogador::class, 'delete'])->name('excluir_jogador');
+
+
+//Seleção
+Route::get('/acessoSelecao/{id}', [ControleSelecao::class, 'detalheSelecao'])->name('acessarSelecao');
+    //Exclui jogador da convocação da seleção
+    Route::get('/desconvoca/{id}', [ControleJogador::class, 'desconvoca'])->name('desconvoca');
+
+    //Acessa page de registro de nova seleção
+    Route::get('/registroSelecao', [ControleSelecao::class, 'create'])->name("inscreverSelecao");
+        //Registra nova seleção
+        Route::post('/gravaselecao', [ControleSelecao::class, 'store'])->name("gravaSelecao");

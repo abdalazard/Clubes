@@ -62,7 +62,13 @@
 
                 <label>Seleção</label>
                 <div class="row">
-                    <input type="text" name="selecao" placeholder="Somente se convocado">
+                    <select name="selecao">
+                        @foreach ($selecoes as $selecao)
+                            <option value="{{$selecao->id}}">{{$selecao->nome_selecao}}</option>
+                        @endforeach
+                            <option value="" selected disabled>Seleções</option>
+                    </select>
+                    <!-- <input type="text" name="selecao" placeholder="Somente se convocado"> -->
                 </div>
                 <br><br>
 
