@@ -22,9 +22,11 @@ class ControleEquipe extends Controller
         //Lista todos os jogadores de um determinado time
         $time = Equipes::where('id', $id_time)->first();
         $jogadores = $time->jogadores()->get();
+
+
         //verifico o time no model Equipes e depois, dentro desta equipe, obtenho os jogadores vinculados ao time
-        return view('/detalhe_time', ['jogadores' => $jogadores, 
-                                      'time' => $time->nome_time, 
+        return view('/detalhe_time', ['jogadores' => $jogadores,
+                                      'time' => $time->nome_time,
                                       'Idtime' => $time->id]);
     }
 
@@ -60,10 +62,10 @@ class ControleEquipe extends Controller
     public function delete($id_time){
         $time = Equipes::where('id', $id_time)->first();
         $torneioId = $time->torneio_id;
-        
+
         $time->delete();
 
         return redirect()->route('acessoTorneio', ['id' => $torneioId]);
-            
+
       }
 }

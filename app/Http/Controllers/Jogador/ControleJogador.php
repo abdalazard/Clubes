@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Jogador;
 use App\Http\Controllers\Controller;
 use App\Models\Equipes;
 use App\Models\Player;
+use App\Models\Selecao;
 use Illuminate\Http\Request;
 
 class ControleJogador extends Controller
@@ -14,9 +15,9 @@ class ControleJogador extends Controller
     {
 
         $time = Equipes::where("id", $time_id)->first();
-
+        $selecao = Selecao::all();
         //redireciona para a pagina de registro de jogadores o tim em questão
-        return view('/insereJogador', ['time' => $time]);
+        return view('/insereJogador', ['time' => $time, 'selecoes' => $selecao]);
     }
 
     public function store(Request $request)
@@ -59,5 +60,14 @@ class ControleJogador extends Controller
         $jogador->delete();
 
         return redirect()->route('detalheTime', ['id_time' => $time_id]);
+    }
+
+    public function desconvoca($id)
+    {
+        $jogador = Player::where('id', $id);
+        $selecaoId = $jogador->first()->selecao_id;
+        $jogador->update(['selecao_id' => null]);
+
+        return redirect()->route('acessarSelecao',['id' => $selecaoId]);
     }
 }

@@ -21,15 +21,14 @@
     <div class="container">
         <h1><a href="{{route('home')}}">Futebol</a></h1>
 
-        <h4>Jogadores do {{$time}}</h4>
+        <!-- <h4>Jogadores da seleção do(a) </h4> -->
 
         <table>
             <tr>
                 <th>Nome do jogador</th>
                 <th>Posição</th>
                 <th>Camisa</th>
-                <th>Nacionalidade</th>
-                <th>Convocação</th>
+                <th>Time atual</th>
                 <th>Exclusão</th>
             </tr>
 
@@ -39,21 +38,14 @@
                 <td>{{$jogador->nome_jogador}}</td>
                 <td>{{$jogador->posicao}}</td>
                 <td>{{$jogador->numero}}</td>
-                <td>{{$jogador->pais}}</td>
-                @if($jogador->selecao_id == null)
-                    <td style="color:red">Não Convocado</td>
-                @else
-                    <td style="color:limegreen">{{$jogador->selecao->nome_selecao }}</td>
-                @endif
-
-                <td><a href="{{route('excluir_jogador', ['id_jogador' => $jogador->id])}}" class="btn btn-danger">Excluir jogador</a></td>
+                <td>{{$jogador->equipeAtual->nome_time}}</td>
+                <td><a href="{{route('desconvoca', ['id' => $jogador->id])}}" class="btn btn-danger">Desconvocar</a></td>
             </tr>
 
             @endforeach
         </table>
         <br>
         <a href="{{url()->previous()}}" class="btn btn-default">Voltar</a>
-        <a href="{{route('insereJogador', ['time_id' => $Idtime])}}" class="btn btn-success">Registrar Jogador no {{$time}}</a>
 
     </div>
 </body>
