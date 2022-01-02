@@ -22,9 +22,6 @@ class ControleJogador extends Controller
 
     public function store(Request $request)
     {
-
-
-
         $validate = $request->validate([
             'nome_jogador' => 'required',
             'posicao' => 'required',
