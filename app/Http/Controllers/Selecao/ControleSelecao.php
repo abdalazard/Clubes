@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Selecao;
 
 use App\Http\Controllers\Controller;
-use App\Models\Equipes;
 use App\Models\Selecao;
 use Illuminate\Http\Request;
 
@@ -14,7 +13,6 @@ class ControleSelecao extends Controller
         $selecao = Selecao::where('id', $id)->first();
         $jogadores = $selecao->jogadordaSelecao()->where('selecao_id', $selecao->id)->get();
 
-
         return view('acessoSelecao', ["jogadores" => $jogadores, "selecao" => $selecao]);
     }
 
@@ -23,7 +21,6 @@ class ControleSelecao extends Controller
         Selecao::where('id', $id)->delete();
 
         return redirect()->route('home');
-
     }
 
     public function create(){
@@ -31,8 +28,6 @@ class ControleSelecao extends Controller
     }
 
     public function store(Request $request){
-
-
         $nova_selecao = new Selecao();
 
         $validate = $request->validate([
@@ -48,6 +43,5 @@ class ControleSelecao extends Controller
         }
 
         return redirect()->route('home');
-
     }
 }

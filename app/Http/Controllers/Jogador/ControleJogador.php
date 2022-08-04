@@ -10,10 +10,8 @@ use Illuminate\Http\Request;
 
 class ControleJogador extends Controller
 {
-
     public function create($time_id)
     {
-
         $time = Equipes::where("id", $time_id)->first();
         $selecao = Selecao::all();
         //redireciona para a pagina de registro de jogadores o tim em questão
@@ -47,7 +45,7 @@ class ControleJogador extends Controller
             $msg = "Erro ao cadastrar jogador!";
         }
 
-        return redirect()->route('detalheTime', ["id_time" => $novo_jogador->time_id]);
+        return redirect()->route('detalheTime', ["id_time" => $novo_jogador->time_idm, "msg" => $msg]);
     }
 
     public function delete($id_jogador)

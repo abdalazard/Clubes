@@ -12,7 +12,6 @@ class Torneio extends Model
 
     public function equipes() : HasMany
     {
-
         return $this->hasMany(Equipes::class, 'torneio_id', 'id');
     }
 

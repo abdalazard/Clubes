@@ -13,10 +13,9 @@ class Selecao extends Model
 
     public function jogadordaSelecao() : HasMany
     {
-
         return $this->hasMany(Player::class, "selecao_id", "id");
 
     }
 
-  
+
 }
