@@ -59,7 +59,7 @@ class ControleJogador extends Controller
 
     public function desconvoca($id)
     {
-        $jogador = Player::where('id', $id);
+        $jogador = Player::findOrFail($id);
         $selecaoId = $jogador->first()->selecao_id;
         $jogador->update(['selecao_id' => null]);
 

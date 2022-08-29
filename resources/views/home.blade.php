@@ -90,7 +90,7 @@
         <br>
 
         <div>
-            <a href="{{route("criartorneio")}}" role="button" class="btn btn-success">Cadastrar Torneio</a>
+            <a href="{{route('criartorneio')}}" role="button" class="btn btn-success">Cadastrar Torneio</a>
 
         </div>
     </div>
