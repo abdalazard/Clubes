@@ -4,4 +4,4 @@
 
 <b>Projeto de estudos pessoais</b>
 
-Estudanto e aperfeiçoando os conhecimentos em laravel, git e em bootstrap com um "tema" fácil e bem popular.
+Estudando e aperfeiçoando os conhecimentos em laravel, git e em bootstrap com um "tema" fácil e bem popular.
