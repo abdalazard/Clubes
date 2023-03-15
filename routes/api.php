@@ -5,6 +5,7 @@ use App\Http\Controllers\Selecao\ControleSelecao;
 use App\Http\Controllers\Time\ControleEquipe;
 use App\Http\Controllers\Torneio\ControleTorneio;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,33 +19,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+    
+// });
+
+
+Route::group([
+    'middleware' => ['auth:sanctum', 'ability:1st-party'],
+    'prefix' => '/v1',
+], function (Router $router) {
+    //Dashboard
+    $router->get('/dashboard', [ControleTorneio::class, 'index'])->name('dashboard');
+
+    //Torneio
+    $router->get('/criartorneio', [ControleTorneio::class, 'create'])->name('criartorneio');
+    $router->post('/grava_torneio', [ControleTorneio::class, 'store'])->name('grava_torneio');
+    $router->get('/acessoTorneio/{id}', [ControleTorneio::class, 'detalheTorneio'])->name('acessoTorneio');
+    $router->get('excluir_torneio/{id_torneio}', [ControleTorneio::class, 'delete'])->name('excluirTorneio');
+
+    //Time
+    $router->get('inscreveEquipe/{id}', [ControleEquipe::class, 'create'])->name('inscreverEquipe');
+    $router->post('/grava_equipe', [ControleEquipe::class, 'store'])->name('grava_equipe');
+    $router->get('/detalhe_time/{id_time}', [ControleEquipe::class, 'listarJogadores'])->name('detalheTime');
+    $router->get('excluir_time/{id_time}', [ControleEquipe::class, 'delete'])->name('excluirTime');
+
+    //Jogadores
+    $router->get('/insereJogador/{time_id}', [ControleJogador::class, 'create'])->name('insereJogador');
+    $router->post('/grava_jogador', [ControleJogador::class, 'store'])->name('grava_jogador');
+    $router->get('excluir_jogador/{id_jogador}', [ControleJogador::class, 'delete'])->name('excluir_jogador');
+
+    //Seleção
+    $router->get('/registroSelecao', [ControleSelecao::class, 'create'])->name('inscreverSelecao');
+    $router->post('/gravaselecao', [ControleSelecao::class, 'store'])->name('gravaSelecao');
+    $router->get('/desconvoca/{id}', [ControleJogador::class, 'desconvoca'])->name('desconvoca');
+    $router->get('excluir_selecao/{id}', [ControleSelecao::class, 'delete'])->name('excluirSelecao');
 });
-
-//Dashboard
-Route::get('/dashboard', [ControleTorneio::class, 'index'])->name('dashboard');
-
-//Torneio
-Route::get('/criartorneio', [ControleTorneio::class, 'create'])->name('criartorneio');
-Route::post('/grava_torneio', [ControleTorneio::class, 'store'])->name('grava_torneio');
-Route::get('/acessoTorneio/{id}', [ControleTorneio::class, 'detalheTorneio'])->name('acessoTorneio');
-Route::get('excluir_torneio/{id_torneio}', [ControleTorneio::class, 'delete'])->name('excluirTorneio');
-
-//Time
-Route::get('inscreveEquipe/{id}', [ControleEquipe::class, 'create'])->name('inscreverEquipe');
-Route::post('/grava_equipe', [ControleEquipe::class, 'store'])->name('grava_equipe');
-Route::get('/detalhe_time/{id_time}', [ControleEquipe::class, 'listarJogadores'])->name('detalheTime');
-Route::get('excluir_time/{id_time}', [ControleEquipe::class, 'delete'])->name('excluirTime');
-
-//Jogadores
-Route::get('/insereJogador/{time_id}', [ControleJogador::class, 'create'])->name('insereJogador');
-Route::post('/grava_jogador', [ControleJogador::class, 'store'])->name('grava_jogador');
-Route::get('excluir_jogador/{id_jogador}', [ControleJogador::class, 'delete'])->name('excluir_jogador');
-
-//Seleção
-//Exclui jogador da convocação da seleção
-Route::get('/registroSelecao', [ControleSelecao::class, 'create'])->name('inscreverSelecao');
-Route::post('/gravaselecao', [ControleSelecao::class, 'store'])->name('gravaSelecao');
-Route::get('/desconvoca/{id}', [ControleJogador::class, 'desconvoca'])->name('desconvoca');
-Route::get('excluir_selecao/{id}', [ControleSelecao::class, 'delete'])->name('excluirSelecao');

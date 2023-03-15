@@ -8,18 +8,15 @@
 
     <title>Futebol</title>
     <style>
-        table, th, td {
-          border: 1px solid black;
+        h {
+            font-size: 70px;
+            text-align: center;
         }
-
-        th, td {
-          padding: 10px;
-        }
-        </style>
+    </style>
 </head>
 <body>
     <div class="container">
-        <h>Test</h>
+        <h>Login test</h>
     </div>
 </body>
 </html>
