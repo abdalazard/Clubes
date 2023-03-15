@@ -11,12 +11,11 @@ class Player extends Model
 
     public function equipeAtual(): BelongsTo
     {
-        return $this->belongsTo(Equipes::class, "time_id", "id");
+        return $this->belongsTo(Equipes::class, 'time_id', 'id');
     }
 
     public function selecao(): BelongsTo
     {
-        return $this->belongsTo(Selecao::class, "selecao_id", "id");
+        return $this->belongsTo(Selecao::class, 'selecao_id', 'id');
     }
-
 }

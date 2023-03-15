@@ -8,26 +8,26 @@ use Illuminate\Http\Request;
 
 class ControleSelecao extends Controller
 {
-    public function detalheSelecao($id){
+    public function detalheSelecao($id) {
 
         $selecao = Selecao::where('id', $id)->first();
         $jogadores = $selecao->jogadordaSelecao()->where('selecao_id', $selecao->id)->get();
 
-        return view('acessoSelecao', ["jogadores" => $jogadores, "selecao" => $selecao]);
+        return view('acessoSelecao', ['jogadores' => $jogadores, 'selecao' => $selecao]);
     }
 
-    public function delete($id){
+    public function delete($id) {
 
         Selecao::where('id', $id)->delete();
 
         return redirect()->route('home');
     }
 
-    public function create(){
+    public function create() {
             return view('registroSelecao');
     }
 
-    public function store(Request $request){
+    public function store(Request $request) {
         $nova_selecao = new Selecao();
 
         $validate = $request->validate([
@@ -39,7 +39,7 @@ class ControleSelecao extends Controller
             $nova_selecao->save();
         }
         else{
-            echo "Erro ao registrar seleção. Tente novamente";
+            echo 'Erro ao registrar seleção. Tente novamente';
         }
 
         return redirect()->route('home');

@@ -7,12 +7,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Torneio extends Model
 {
+    protected $table = 'torneio';
 
-    protected $table = "torneio";
-
-    public function equipes() : HasMany
+    public function equipes(): HasMany
     {
         return $this->hasMany(Equipes::class, 'torneio_id', 'id');
     }
-
 }

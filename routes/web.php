@@ -21,49 +21,32 @@ use Illuminate\Support\Facades\Route;
 //Seleção
     //acessa a homepage, que mostra os torneios em forma de botão
     //Também envia para a homepage uma lista das seleções presentes no banco
-    Route::get("/", [ControleTorneio::class, 'index'])->name('home');
-        //Exclui torneio do sistema
-        Route::get('excluir_torneio/{id_torneio}', [ControleTorneio::class, 'delete'])->name('excluirTorneio');
-        //Exclui seleção da lista
-        Route::get('excluir_selecao/{id}', [ControleSelecao::class, 'delete'])->name('excluirSelecao');
+Route::get('/', [ControleTorneio::class, 'index'])->name('home');
+Route::get('excluir_torneio/{id_torneio}', [ControleTorneio::class, 'delete'])->name('excluirTorneio');
+Route::get('excluir_selecao/{id}', [ControleSelecao::class, 'delete'])->name('excluirSelecao');
 
+//Torneio
+Route::get('/criartorneio', [ControleTorneio::class, 'create'])->name('criartorneio');
+Route::post('/grava_torneio', [ControleTorneio::class, 'store'])->name('grava_torneio');
 
-    //acessa a criação de um novo torneio
-    Route::get('/criartorneio', [ControleTorneio::class, "create"])->name('criartorneio');
-            //Cadastra um torneio
-            Route::post('/grava_torneio', [ControleTorneio::class, 'store'])->name('grava_torneio');
+Route::get('/acessoTorneio/{id}', [ControleTorneio::class, 'detalheTorneio'])->name('acessoTorneio');
 
-    //detalhe dos torneios(times, e etc)
-    Route::get("/acessoTorneio/{id}", [ControleTorneio::class, "detalheTorneio"])->name('acessoTorneio');
+//Time
+Route::get('inscreveEquipe/{id}', [ControleEquipe::class, 'create'])->name('inscreverEquipe');
 
-            //Time
-                //Redireciona para a pagina de criação de times
-                Route::get('inscreveEquipe/{id}', [ControleEquipe::class, "create"])->name("inscreverEquipe");
+Route::post('/grava_equipe', [ControleEquipe::class, 'store'])->name('grava_equipe');
 
-                            //Inscreve os times no torneio em questão
-                            Route::post('/grava_equipe', [ControleEquipe::class, "store"])->name('grava_equipe');
+Route::get('excluir_time/{id_time}', [ControleEquipe::class, 'delete'])->name('excluirTime');
 
-                //Exclui time da competição
-                Route::get('excluir_time/{id_time}', [ControleEquipe::class, 'delete'])->name('excluirTime');
-
-
-                //Acessa Dados dos times(Elenco e etc)
-                Route::get('/detalhe_time/{id_time}', [ControleEquipe::class, 'listarJogadores'])->name('detalheTime');
-                        //Jogadores
-                            //Redireciona para registrar um jogador no time em questão
-                            Route::get('/insereJogador/{time_id}', [ControleJogador::class, 'create'])->name("insereJogador");
-                                        //Cadastra jogadores no time em questão
-                                        Route::post('/grava_jogador', [ControleJogador::class, 'store'])->name('grava_jogador');
-                           //Excluir jogador do time
-                           Route::get('excluir_jogador/{id_jogador}', [ControleJogador::class, 'delete'])->name('excluir_jogador');
-
+Route::get('/detalhe_time/{id_time}', [ControleEquipe::class, 'listarJogadores'])->name('detalheTime');
+//Jogadores
+Route::get('/insereJogador/{time_id}', [ControleJogador::class, 'create'])->name('insereJogador');
+Route::post('/grava_jogador', [ControleJogador::class, 'store'])->name('grava_jogador');
+Route::get('excluir_jogador/{id_jogador}', [ControleJogador::class, 'delete'])->name('excluir_jogador');
 
 //Seleção
-Route::get('/acessoSelecao/{id}', [ControleSelecao::class, 'detalheSelecao'])->name('acessarSelecao');
-    //Exclui jogador da convocação da seleção
-    Route::get('/desconvoca/{id}', [ControleJogador::class, 'desconvoca'])->name('desconvoca');
+//Exclui jogador da convocação da seleção
+Route::get('/desconvoca/{id}', [ControleJogador::class, 'desconvoca'])->name('desconvoca');
 
-    //Acessa page de registro de nova seleção
-    Route::get('/registroSelecao', [ControleSelecao::class, 'create'])->name("inscreverSelecao");
-        //Registra nova seleção
-        Route::post('/gravaselecao', [ControleSelecao::class, 'store'])->name("gravaSelecao");
+Route::get('/registroSelecao', [ControleSelecao::class, 'create'])->name('inscreverSelecao');
+Route::post('/gravaselecao', [ControleSelecao::class, 'store'])->name('gravaSelecao');

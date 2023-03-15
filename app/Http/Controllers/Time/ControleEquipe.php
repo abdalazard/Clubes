@@ -9,28 +9,28 @@ use Illuminate\Http\Request;
 
 class ControleEquipe extends Controller
 {
-    public function create($idTorneio){
+    public function create($idTorneio) {
         $torneio = Torneio::where('id', $idTorneio)->first();
 
         return view('/inscreverEquipe', ['torneio' => $torneio]);
     }
 
-    public function listarJogadores($id_time){
+    public function listarJogadores($id_time) {
         $time = Equipes::where('id', $id_time)->first();
         $jogadores = $time->jogadores()->get();
 
         return view('/detalhe_time', ['jogadores' => $jogadores,
-                                      'time' => $time->nome_time,
-                                      'Idtime' => $time->id]);
+            'time' => $time->nome_time,
+            'Idtime' => $time->id, ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request) {
         $novo_time = new Equipes();
 
         $validate = $request->validate([
             'nome_time' => 'required',
             'pais' => 'required',
-            'torneio_id' => 'required'
+            'torneio_id' => 'required',
         ]);
 
         if($validate){
@@ -39,16 +39,17 @@ class ControleEquipe extends Controller
             $novo_time->torneio_id = $request->torneio_id;
             $novo_time->save();
 
-            $msg = "Time inscrito com sucesso!";
+            $msg = 'Time inscrito com sucesso!';
+
             return redirect()->route('home', ['msg' => $msg]);
         }else{
-            $msg = "Erro!";
+            $msg = 'Erro!';
 
             return redirect()->route('acessotorneio', ['msg' => $msg]);
         }
     }
 
-    public function delete($id_time){
+    public function delete($id_time) {
         $time = Equipes::where('id', $id_time)->first();
         $torneioId = $time->torneio_id;
         $time->delete();

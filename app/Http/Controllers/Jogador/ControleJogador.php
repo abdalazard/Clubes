@@ -12,7 +12,7 @@ class ControleJogador extends Controller
 {
     public function create($time_id)
     {
-        $time = Equipes::where("id", $time_id)->first();
+        $time = Equipes::where('id', $time_id)->first();
         $selecao = Selecao::all();
         //redireciona para a pagina de registro de jogadores o tim em questão
         return view('/insereJogador', ['time' => $time, 'selecoes' => $selecao]);
@@ -26,7 +26,7 @@ class ControleJogador extends Controller
             'camisa' => 'required',
             'pais' => 'required',
             'time_id' => 'required',
-            'selecao' => 'nullable'
+            'selecao' => 'nullable',
         ]);
 
         if ($validate) {
@@ -40,12 +40,12 @@ class ControleJogador extends Controller
             $novo_jogador->selecao_id = $request->selecao;
 
             $novo_jogador->save();
-            $msg = "Jogador cadastrado!";
+            $msg = 'Jogador cadastrado!';
         } else {
-            $msg = "Erro ao cadastrar jogador!";
+            $msg = 'Erro ao cadastrar jogador!';
         }
 
-        return redirect()->route('detalheTime', ["id_time" => $novo_jogador->time_idm, "msg" => $msg]);
+        return redirect()->route('detalheTime', ['id_time' => $novo_jogador->time_idm, 'msg' => $msg]);
     }
 
     public function delete($id_jogador)
@@ -63,6 +63,6 @@ class ControleJogador extends Controller
         $selecaoId = $jogador->first()->selecao_id;
         $jogador->update(['selecao_id' => null]);
 
-        return redirect()->route('acessarSelecao',['id' => $selecaoId]);
+        return redirect()->route('acessarSelecao', ['id' => $selecaoId]);
     }
 }

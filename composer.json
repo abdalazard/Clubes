@@ -5,20 +5,23 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.65",
-        "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "inertiajs/inertia-laravel": "^0.6.4",
+        "laravel/framework": "^8.75",
+        "laravel/sanctum": "^2.15",
+        "laravel/tinker": "^2.5",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "matt-allan/laravel-code-style": "^0.7.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
-        "phpunit/phpunit": "^9.5.10"
+        "phpunit/phpunit": "9.5"
     },
     "autoload": {
         "psr-4": {
@@ -33,12 +36,13 @@
         }
     },
     "scripts": {
+        "test": "phpunit",
+        "style-lint": "php-cs-fixer fix --dry-run --diff --ansi",
+        "style-fix": "php-cs-fixer fix --diff --ansi",
+        "ci-style-lint": "php-cs-fixer fix --dry-run",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
