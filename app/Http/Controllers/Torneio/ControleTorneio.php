@@ -13,7 +13,7 @@ class ControleTorneio extends Controller
         $torneios = Torneio::all();
         $selecoes = Selecao::all();
 
-        return view('home', ['torneios' => $torneios, 'selecoes' => $selecoes]);
+        return view('dashboard', ['torneios' => $torneios, 'selecoes' => $selecoes]);
     }
 
     public function create() {
