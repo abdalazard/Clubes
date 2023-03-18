@@ -8,15 +8,61 @@
 
     <title>Futebol</title>
     <style>
-        h {
-            font-size: 70px;
+        h1 {
+            font-size: 30px;
             text-align: center;
+            justify-content: center;
+        }
+        .box {
+            background-color: green;
+            color: white;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        hr {
+            display: block;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            margin-left: auto;
+            margin-right: auto;
+            border-style: inset;
+            border-width: 3px;
+            background-color:#fff;
+        }
+        .btn-login {
+            color: white;
+            background-color: blue;
+            margin: 30px;
+            padding: 10px;
+            border-radius: 10px;
+            margin-block-end: auto;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h>Login test</h>
-    </div>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-8">
+                <h1>Clubes App</h1>
+            </div>
+            <div class="col-4">
+                <a href="{{url('login')}}" class="btn-login">Login</a>
+            </div>
+        </div>
+    
+        <div class="box">
+            <div>
+                <h1>Artilheiros</h1>
+                @foreach ($players as $player)
+                    <h1>{{$player->id}}</h1>
+                @endforeach
+            </div>
+            <hr>
+            <div>
+                <h1>Clubes</h1>
+            </div>
+        </div>
+    </div>    
 </body>
 </html>
